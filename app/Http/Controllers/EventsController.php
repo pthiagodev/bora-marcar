@@ -7,13 +7,9 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $eventos = [
-            'DevOps day',
-            'PHPCE',
-            'Encontro de usuários Java'
-        ];
+        $eventos = Event::all();
 
         return view('eventos.index')->with('eventos', $eventos);
     }
@@ -25,7 +21,11 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $evento = new Event();
+        $evento->nome = $request->input('nome');
+        $evento->save();
+
+        return redirect('/eventos');
     }
 
     public function show(Event $event)

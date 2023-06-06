@@ -3,7 +3,7 @@
 
     <ul class="list-group">
         @foreach ($eventos as $evento)
-        <li class="list-group-item">{{ $evento }}</li>
-        @endforeach;
+        <li class="list-group-item">{{ $evento->nome }}</li>
+        @endforeach
     </ul>
 </x-layout>
