@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/events', EventsController::class)
-    ->only(['index', 'create', 'store', 'destroy']);
+    ->except('show');
 

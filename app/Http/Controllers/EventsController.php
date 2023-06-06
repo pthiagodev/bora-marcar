@@ -35,12 +35,16 @@ class EventsController extends Controller
 
     public function edit(Event $event)
     {
-        //
+        return view('events.edit')->with('event', $event);
     }
 
     public function update(Request $request, Event $event)
     {
-        //
+        $event->name = $request->name;
+        $event->save();
+
+        return to_route('events.index')
+            ->with('success.msg', "Evento '{$event->name}' atualizado com sucesso!");
     }
 
     public function destroy(Event $event)
