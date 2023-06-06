@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $eventos = Event::all();
+        $events = Event::query()->orderBy('name')->get();
+        $successMsg = session('success.msg');
 
-        return view('events.index')->with('eventos', $eventos);
+        return view('events.index')->with('events', $events)->with('successMsg', $successMsg);
     }
 
     public function create()
@@ -41,8 +42,11 @@ class EventsController extends Controller
         //
     }
 
-    public function destroy(Event $event)
+    public function destroy(Request $request)
     {
-        //
+        Event::destroy($request->event);
+        $request->session()->flash('success.msg', 'Evento removido com sucesso!');
+
+        return to_route('events.index');
     }
 }

@@ -18,4 +18,6 @@ Route::get('/', function () {
     return redirect('/events');
 });
 
-Route::resource('/events', EventsController::class);
+Route::resource('/events', EventsController::class)
+    ->only(['index', 'create', 'store', 'destroy']);
+
