@@ -22,9 +22,10 @@ class EventsController extends Controller
 
     public function store(Request $request)
     {
-        Event::create($request->all());
+        $event = Event::create($request->all());
 
-        return to_route('events.index');
+        return to_route('events.index')
+            ->with('success.msg', "Evento '{$event->name}' adicionado com sucesso!");
     }
 
     public function show(Event $event)
@@ -42,11 +43,11 @@ class EventsController extends Controller
         //
     }
 
-    public function destroy(Request $request)
+    public function destroy(Event $event)
     {
-        Event::destroy($request->event);
-        $request->session()->flash('success.msg', 'Evento removido com sucesso!');
+        $event->delete();
 
-        return to_route('events.index');
+        return to_route('events.index')
+            ->with('success.msg', "Evento '{$event->name}' removido com sucesso!");
     }
 }
