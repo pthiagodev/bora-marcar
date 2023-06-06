@@ -11,9 +11,12 @@
     <title>{{ $title }} - Bora Marcar?</title>
 </head>
 <body>
+    <div class="container">
 
-<h1>{{ $title }}</h1>
+        <h1>{{ $title }}</h1>
 
-{{ $slot }}
+        {{ $slot }}
+
+    </div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <x-layout title="Lista de Eventos">
-    <a href="/eventos/criar">Adicionar</a>
+    <a href="/eventos/criar" class="btn btn-dark mb-2">Adicionar</a>
 
-    <ul>
+    <ul class="list-group">
         @foreach ($eventos as $evento)
-        <li>{{ $evento }}</li>
+        <li class="list-group-item">{{ $evento }}</li>
         @endforeach;
     </ul>
 </x-layout>
