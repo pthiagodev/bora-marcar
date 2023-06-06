@@ -1,5 +1,5 @@
 <x-layout title="Novo Evento">
-    <form action="/eventos/salvar" method="post">
+    <form action="{{ route('events.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>

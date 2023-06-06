@@ -11,21 +11,19 @@ class EventsController extends Controller
     {
         $eventos = Event::all();
 
-        return view('eventos.index')->with('eventos', $eventos);
+        return view('events.index')->with('eventos', $eventos);
     }
 
     public function create()
     {
-        return view('eventos.create');
+        return view('events.create');
     }
 
     public function store(Request $request)
     {
-        $evento = new Event();
-        $evento->nome = $request->input('nome');
-        $evento->save();
+        Event::create($request->all());
 
-        return redirect('/eventos');
+        return to_route('events.index');
     }
 
     public function show(Event $event)
