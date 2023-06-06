@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/eventos', [EventsController::class, 'index']);
 Route::get('/eventos/criar', [EventsController::class, 'create']);
+
