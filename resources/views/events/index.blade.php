@@ -7,6 +7,7 @@
     </div>
     @endisset
 
+
     <ul class="list-group">
         @foreach ($events as $event)
         <li class="list-group-item d-flex justify-content-between align-items-center">

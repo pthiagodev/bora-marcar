@@ -11,8 +11,8 @@
     <title>{{ $title }} - Bora Marcar?</title>
 </head>
 <body>
-    <div class="container">
-        <x-nav-bar />
+    <x-nav-bar />
+    <div class="container bg-secondary-subtle my-4">
 
         <h1>{{ $title }}</h1>
 
