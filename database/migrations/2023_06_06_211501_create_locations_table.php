@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', length: 128);
             $table->string('address', length: 128);
-            $table->foreignId('events_id')->constrained();
             $table->timestamps();
         });
     }
