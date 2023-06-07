@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\OrganizersController;
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/events');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('/events', EventsController::class)
     ->except('show');
