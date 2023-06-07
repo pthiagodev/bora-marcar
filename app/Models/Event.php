@@ -11,7 +11,8 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'date'
     ];
 
     public function location(): BelongsTo
