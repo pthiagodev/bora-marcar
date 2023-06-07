@@ -11,7 +11,8 @@ class Location extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'address'
     ];
 
     public function events(): HasMany
