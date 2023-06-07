@@ -12,6 +12,8 @@
 </head>
 <body>
     <div class="container">
+        <x-nav-bar />
+
         <h1>{{ $title }}</h1>
 
         @if ($errors->any())
