@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\OrganizersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +23,8 @@ Route::get('/', function () {
 Route::resource('/events', EventsController::class)
     ->except('show');
 
+Route::resource('/locations', LocationsController::class)
+    ->except('show');
+
+Route::resource('/organizers', OrganizersController::class)
+    ->except('show');
