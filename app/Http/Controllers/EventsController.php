@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
+use App\Models\Location;
+use App\Models\Organizer;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -18,7 +20,10 @@ class EventsController extends Controller
 
     public function create()
     {
-        return view('events.create');
+        $locations = Location::query()->orderBy('name')->get();
+        $organizers = Organizer::query()->orderBy('name')->get();
+
+        return view('events.create')->with('locations', $locations)->with('organizers', $organizers);
     }
 
     public function store(EventFormRequest $request)
