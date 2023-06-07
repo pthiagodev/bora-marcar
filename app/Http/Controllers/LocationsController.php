@@ -22,7 +22,6 @@ class LocationsController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
         $location = Location::create($request->all());
 
         return to_route('locations.index')
