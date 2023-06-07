@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $events = Event::query()->orderBy('name')->get();
         $successMsg = session('success.msg');
@@ -20,7 +21,7 @@ class EventsController extends Controller
         return view('events.create');
     }
 
-    public function store(Request $request)
+    public function store(EventFormRequest $request)
     {
         $event = Event::create($request->all());
 
@@ -38,7 +39,7 @@ class EventsController extends Controller
         return view('events.edit')->with('event', $event);
     }
 
-    public function update(Request $request, Event $event)
+    public function update(EventFormRequest $request, Event $event)
     {
         $event->name = $request->name;
         $event->save();
