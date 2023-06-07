@@ -12,7 +12,8 @@ class LocationsController extends Controller
         $locations = Location::query()->orderBy('name')->get();
         $successMsg = session('success.msg');
 
-        return view('locations.index')->with('locations', $locations)->with('successMsg', $successMsg);
+        return view('locations.index')->with('locations', $locations)
+            ->with('successMsg', $successMsg);
     }
 
     public function create()
