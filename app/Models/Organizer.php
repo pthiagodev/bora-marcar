@@ -11,7 +11,8 @@ class Organizer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'phone'
     ];
 
     public function events(): HasMany
