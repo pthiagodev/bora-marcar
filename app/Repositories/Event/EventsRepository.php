@@ -14,5 +14,5 @@ interface EventsRepository
 
     public function update(EventFormRequest $request, Event $event): Event;
 
-    public function delete(Event $event);
+    public function remove(Event $event);
 }
