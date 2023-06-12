@@ -6,13 +6,17 @@ use App\Http\Requests\EventFormRequest;
 use App\Models\Event;
 use App\Models\Location;
 use App\Models\Organizer;
-use Illuminate\Http\Request;
+use App\Repositories\Event\EventsRepository;
 
 class EventsController extends Controller
 {
+    public function __construct(private EventsRepository $repository)
+    {
+    }
+
     public function index()
     {
-        $events = Event::query()->orderBy('name')->get();
+        $events = $this->repository->list();
         $successMsg = session('success.msg');
 
         return view('events.index')->with('events', $events)->with('successMsg', $successMsg);
@@ -28,7 +32,7 @@ class EventsController extends Controller
 
     public function store(EventFormRequest $request)
     {
-        $event = Event::create($request->all());
+        $event = $this->repository->add($request);
 
         return to_route('events.index')
             ->with('success.msg', "Evento '{$event->name}' adicionado com sucesso!");
@@ -46,8 +50,7 @@ class EventsController extends Controller
 
     public function update(EventFormRequest $request, Event $event)
     {
-        $event->name = $request->name;
-        $event->save();
+        $event = $this->repository->update($request, $event);
 
         return to_route('events.index')
             ->with('success.msg', "Evento '{$event->name}' atualizado com sucesso!");
@@ -55,7 +58,7 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        $event->delete();
+        $this->repository->delete($event);
 
         return to_route('events.index')
             ->with('success.msg', "Evento '{$event->name}' removido com sucesso!");
