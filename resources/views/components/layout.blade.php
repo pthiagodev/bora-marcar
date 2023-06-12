@@ -8,13 +8,13 @@
 
     @vite(['resources/js/app.js'])
 
-    <title>{{ $title }} - Bora Marcar?</title>
+    <title>{!! $title !!} - Bora Marcar?</title>
 </head>
 <body>
     <x-nav-bar />
-    <div class="container bg-secondary-subtle my-4">
+    <div class="container bg-secondary-subtle my-4 py-4">
 
-        <h1>{{ $title }}</h1>
+        <h1>{!! $title !!}</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
