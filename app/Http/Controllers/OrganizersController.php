@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organizer;
+use App\Repositories\Organizer\OrganizersRepository;
 use Illuminate\Http\Request;
 
 class OrganizersController extends Controller
 {
+
+    public function __construct(
+        private OrganizersRepository $organizersRepository)
+    {
+    }
+
     public function index()
     {
         $organizers = Organizer::query()->orderBy('name')->get();
@@ -23,7 +30,7 @@ class OrganizersController extends Controller
 
     public function store(Request $request)
     {
-        $organizer = Organizer::create($request->all());
+        $organizer = $this->organizersRepository->add($request);
 
         return to_route('organizers.index')
             ->with('success.msg', "Organizador '{$organizer->name}' adicionado com sucesso!");
@@ -42,9 +49,7 @@ class OrganizersController extends Controller
 
     public function update(Request $request, Organizer $organizer)
     {
-        $organizer->name = $request->name;
-        $organizer->phone = $request->phone;
-        $organizer->save();
+        $organizer = $this->update($request, $organizer);
 
         return to_route('organizers.index')
             ->with('success.msg', "Organizador '{$organizer->name}' atualizado com sucesso!");

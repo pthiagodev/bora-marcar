@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Repositories\Location\LocationsRepository;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
 {
+
+    public function __construct(
+        private LocationsRepository $locationsRepository)
+    {
+    }
+
     public function index()
     {
-        $locations = Location::query()->orderBy('name')->get();
+        $locations = $this->locationsRepository->list();
         $successMsg = session('success.msg');
 
         return view('locations.index')->with('locations', $locations)
@@ -23,7 +30,7 @@ class LocationsController extends Controller
 
     public function store(Request $request)
     {
-        $location = Location::create($request->all());
+        $location = $this->locationsRepository->add($request);
 
         return to_route('locations.index')
             ->with('success.msg', "Local '{$location->name}' adicionado com sucesso!");
@@ -41,9 +48,7 @@ class LocationsController extends Controller
 
     public function update(Request $request, Location $location)
     {
-        $location->name = $request->name;
-        $location->address = $request->address;
-        $location->save();
+        $location = $this->locationsRepository->update($request, $location);
 
         return to_route('locations.index')
             ->with('success.msg', "Local '{$location->name}' atualizado com sucesso!");
@@ -51,7 +56,7 @@ class LocationsController extends Controller
 
     public function destroy(Location $location)
     {
-        $location->delete();
+        $this->locationsRepository->remove($location);
 
         return to_route('locations.index')
             ->with('success.msg', "Local '{$location->name}' removido com sucesso!");
