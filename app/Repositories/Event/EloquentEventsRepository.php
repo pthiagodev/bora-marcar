@@ -26,7 +26,7 @@ class EloquentEventsRepository implements EventsRepository
         return $event;
     }
 
-    public function delete(Event $event)
+    public function remove(Event $event)
     {
         $event->delete();
     }
