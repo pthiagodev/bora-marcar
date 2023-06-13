@@ -1,31 +1,39 @@
-<x-layout title="Lista de Locais">
-    <a href="{{ route('locations.create') }}" class="btn btn-dark mb-2">Adicionar</a>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Lista de Locais') }}
+        </h2>
+    </x-slot>
 
-    @isset($successMsg)
-        <div class="alert alert-success">
-            {{ $successMsg }}
-        </div>
-    @endisset
+    <div class="container my-4">
+        <a href="{{ route('locations.create') }}" class="btn btn-dark mb-2">Novo Local</a>
 
-    <ul class="list-group">
-        @foreach ($locations as $location)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ $location->name }}
+        @isset($successMsg)
+            <div class="alert alert-success">
+                {{ $successMsg }}
+            </div>
+        @endisset
 
-                <span class="d-flex">
-                <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-primary btn-sm">
-                    E
-                </a>
+        <ul class="list-group">
+            @foreach ($locations as $location)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ $location->name }}
 
-                <form action="{{ route('locations.destroy', $location->id) }}" method="post" class="ms-2">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger btn-sm">
-                        X
-                    </button>
-                </form>
-            </span>
-            </li>
-        @endforeach
-    </ul>
-</x-layout>
+                    <span class="d-flex">
+                    <a href="{{ route('locations.edit', $location->id) }}" class="btn btn-primary btn-sm">
+                        E
+                    </a>
+
+                    <form action="{{ route('locations.destroy', $location->id) }}" method="post" class="ms-2">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm">
+                            X
+                        </button>
+                    </form>
+                </span>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</x-app-layout>
