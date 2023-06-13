@@ -50,7 +50,13 @@ class EventsController extends Controller
 
     public function edit(Event $event)
     {
-        return view('events.edit')->with('event', $event);
+        $locations = $this->locationsRepository->list();
+        $organizers = $this->organizersRepository->list();
+
+        return view('events.edit')
+            ->with('event', $event)
+            ->with('locations', $locations)
+            ->with('organizers', $organizers);
     }
 
     public function update(EventFormRequest $request, Event $event)
